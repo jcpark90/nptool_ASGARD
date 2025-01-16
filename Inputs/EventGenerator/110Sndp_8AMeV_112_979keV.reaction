@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%  Reaction file for 60Fe(d,p)61Fe reaction  %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Beam energy given in MeV ; Excitation in MeV ; emmitance in rad
+Beam
+  Particle= 110Sn
+  Energy= 880 MeV
+ SigmaEnergy= 1
+ SigmaX= 0.851
+ SigmaY= 0.851
+ SigmaThetaX= 0 
+ SigmaPhiY= 0
+  MeanThetaX= 0
+  MeanPhiY= 0
+  MeanX= 0
+  MeanY= 0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TwoBodyReaction
+ Beam= 110Sn
+ Target= 2H
+ Light= 1H
+ Heavy= 111Sn
+ ExcitationEnergyLight= 0.0
+ ExcitationEnergyHeavy= 0.979
+ CrossSectionPath= 110Sn_dp_111Sn_8MeVu_112_979keV_An_Koning.txt CS
+ ShootLight= 1
+ ShootHeavy= 0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

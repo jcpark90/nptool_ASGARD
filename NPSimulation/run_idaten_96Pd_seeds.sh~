@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for seed in $(seq 1001 1 1003)
+do
+    sed "s/SEED/$seed/g;" idaten_96Pd_template.mac > idaten_96Pd_${seed}.mac
+    npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 96Pd_isomer.source -B idaten_96Pd_${seed}.mac -O idaten_commissioning_96Pd_${seed}
+    rm idaten_96Pd_${seed}.mac
+done
+
+    

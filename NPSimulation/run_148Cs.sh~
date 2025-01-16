@@ -1,0 +1,5 @@
+#!/bin/bash
+npsimulation -D IDATEN_HPGe_passive.detector -E 128Cd_isomer_n2.source -B 128Cd_isomer.mac -O 128Cd_isomer_1;
+npsimulation -D IDATEN_HPGe_passive.detector -E 128Cd_isomer_n1.source -B 128Cd_isomer.mac -O 128Cd_isomer_2;
+npsimulation -D IDATEN_HPGe_passive.detector -E 128Cd_isomer_p1.source -B 128Cd_isomer.mac -O 128Cd_isomer_3;
+npsimulation -D IDATEN_HPGe_passive.detector -E 128Cd_isomer_p2.source -B 128Cd_isomer.mac -O 128Cd_isomer_4;

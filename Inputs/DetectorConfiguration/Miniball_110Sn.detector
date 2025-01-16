@@ -1,0 +1,61 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GeneralTarget
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Target
+ THICKNESS= 10
+ RADIUS=	20
+ MATERIAL= CD2
+ ANGLE= 0
+ X= 0
+ Y= 0
+ Z= 0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Miniball
+ R= 125
+ THETA= 138
+ PHI= 306
+ Shape= Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Miniball
+ R= 125
+ THETA= 131 
+ PHI= 204
+ Shape= Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Miniball
+ R= 125
+ THETA= 67 
+ PHI= 293
+ Shape= Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Miniball
+ R= 125
+ THETA= 69
+ PHI= 213
+ Shape= Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Miniball
+ R= 125
+ THETA= 63
+ PHI= 53
+ Shape= Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Miniball
+ R= 125
+ THETA= 67
+ PHI= 135
+ Shape= Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Miniball
+ R= 125
+ THETA= 133 
+ PHI= 43
+ Shape= Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Miniball
+ R= 125
+ THETA= 131 
+ PHI= 137
+ Shape= Square
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

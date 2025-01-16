@@ -1,0 +1,11 @@
+#!/bin/bash
+
+for seed in $(seq 1043 1 1056)
+do
+    sed "s/SEED/$seed/g;" idaten_96Pd_template.mac > idaten_96Pd_${seed}.mac
+    npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 96Pd_isomer.source -B idaten_96Pd_${seed}.mac -O idaten_commissioning_96Pd_${seed}
+    mv /home/jcpark/nptool/Outputs/Simulation/idaten_commissioning_96Pd_${seed}.root /media/jcpark/t7_shield/idaten/
+    rm idaten_96Pd_${seed}.mac
+done
+
+    

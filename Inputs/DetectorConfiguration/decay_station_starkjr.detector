@@ -1,0 +1,64 @@
+ASGARD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+Tigress Clover
+ CloverId = 0
+ Theta= 90deg
+ Phi= 0deg
+ R= 110mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+Tigress Clover
+ CloverId = 1
+ Theta= 90deg
+ Phi= 45deg
+ R= 110mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 2
+ Theta= 90deg
+ Phi= 90deg
+ R= 110mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 3
+ Theta= 90deg
+ Phi= 135deg
+ R= 110mm
+ Beta= 0 0 0 deg
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 4
+ Theta= 90deg
+ Phi= 180deg
+ R= 110mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 5
+ Theta= 90deg
+ Phi= 225deg
+ R= 110mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 6
+ Theta= 90deg
+ Phi= 270deg
+ R= 110mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 7
+ Theta= 90deg
+ Phi= 315deg
+ R= 110mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+WAS3ABi DSSSD
+ Z = 0.0 mm
+ NumLayers = 3
+ GapDistance = 2.0 mm
+ Thickness = 1000 micrometer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,3 @@
+/particle/nuclideTable/min_halflife 1.0 ps
+/random/setSeeds SEED SEED
+/run/beamOn 1000000

@@ -1,0 +1,205 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GeneralTarget
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Target
+THICKNESS= 100 micrometer
+ RADIUS= 9 mm
+ MATERIAL= CD2
+ ANGLE= 0 deg
+ X= 0 mm 
+ Y= 0 mm
+ Z= 0 mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+ASGARD Clover
+ CloverId= 0
+ R= 150
+ Phi= 22.5
+ Theta= 90
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 1
+ R= 150
+ Phi= 67.5
+ Theta= 90
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 2
+ R= 150
+ Phi= 112.5
+ Theta= 90
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 3
+ R= 150
+ Phi= 157.5
+ Theta= 90
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 4
+ R= 150
+ Phi= 202.5
+ Theta= 90
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 5
+ R= 150
+ Phi= 247.5
+ Theta= 90
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 6
+ R= 150
+ Phi= 292.5
+ Theta= 90
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 7
+ R= 150
+ Phi= 337.5
+ Theta= 90
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 8
+ R= 150
+ Phi= 22.5
+ Theta= 135
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 9
+ R= 150
+ Phi= 112.5
+ Theta= 135
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 10
+ R= 150
+ Phi= 202.5
+ Theta= 135
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 11
+ R= 150
+ Phi= 292.5
+ Theta= 135
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 12
+ R= 150
+ Phi= -22.5
+ Theta=45
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 13
+ R= 150
+ Phi= 67.5
+ Theta= 45
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 14
+ R= 150
+ Phi= 157.5
+ Theta= 45
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 15
+ R= 150
+ Phi= 247.5
+ Theta= 45
+ Beta= 0 0 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         0 deg
+ Z=         51.55 mm
+ Rev=          1
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         60 deg
+ Z=         51.55 mm
+ Rev=          1
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         120 deg
+ Z=         51.55 mm
+ Rev=          1
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         180 deg
+ Z=         51.55 mm
+ Rev=          1
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=        240 deg
+ Z=         51.55 mm
+ Rev=          1
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=        300 deg
+ Z=         51.55 mm
+ Rev=          1
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         00 deg
+ Z=       -51.55 mm
+ Rev=          0
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         60 deg
+ Z=       -51.55 mm
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         120 deg
+ Z=       -51.55 mm
+ Rev=          0
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         180 deg
+ Z=       -51.55 mm
+ Rev=          0
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         240 deg
+ Z=       -51.55 mm
+ Rev=          0
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARK
+ Type= X6
+ Rho=         46 mm
+ Phi=         300 deg
+ Z=       -51.55 mm
+ Rev=          0
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

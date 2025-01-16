@@ -1,0 +1,20 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% A "collimated" Source to be used as EventGenerator %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      Energy are given in MeV , Position in mm % 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Isotropic
+ EnergyLow= 0 MeV
+ EnergyHigh= 0 MeV
+ ExcitationEnergy = 2.057 MeV 
+ HalfOpenAngleMin= 0 deg
+ HalfOpenAngleMax= 180 deg
+ x0= 0 mm
+ y0= 0 mm
+ z0= 0 mm
+% atomic_bgd_file = 96Pd_28Si_130AMeV.root
+% si_det_thickness = 0.5 mm
+ SigmaR = 2 cm
+ particle= 102Sn
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Supported particle type: proton, neutron, deuton, triton, He3 , alpha 

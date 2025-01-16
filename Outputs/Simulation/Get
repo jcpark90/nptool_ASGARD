@@ -1,0 +1,9 @@
+start_stop_analysis_plastic_idaten.C:    for(int n = 0; n < Plastic->GetMult();n++){
+start_stop_analysis_plastic_idaten.C:      if (Plastic->GetTime(n) < tpl_temp)
+start_stop_analysis_plastic_idaten.C:	tpl_temp = Plastic->GetTime(n); // get the fastest time hit on the plastic detector
+start_stop_analysis_plastic_idaten_short.C:    for(int n = 0; n < Plastic->GetMult();n++){
+start_stop_analysis_plastic_idaten_short.C:      if (Plastic->GetTime(n) < tpl_temp)
+start_stop_analysis_plastic_idaten_short.C:	tpl_temp = Plastic->GetTime(n); // get the fastest time hit on the plastic detector
+start_stop_analysis_v2.C:    for(int n = 0; n < Plastic->GetMult();n++){
+start_stop_analysis_v2.C:      if (Plastic->GetTime(n) < tpl_temp)
+start_stop_analysis_v2.C:	tpl_temp = Plastic->GetTime(n); // get the fastest time hit on the plastic detector

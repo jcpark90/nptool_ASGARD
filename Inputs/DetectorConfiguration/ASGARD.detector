@@ -1,0 +1,48 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GeneralTarget
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Target
+ THICKNESS= 0.001 micrometer
+ RADIUS= 5 mm
+ MATERIAL= CD2
+ ANGLE= 0 deg
+ X= 0 mm 
+ Y= 0 mm
+ Z= 0 mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+ASGARD Clover
+ CloverId= 0
+ R= 110
+ Phi= 90
+ Theta= -45
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 1
+ R= 110
+ Phi= 90
+ Theta= 0
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 2
+ R= 110
+ Phi= 90
+ Theta= 45
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 3
+ R= 110
+ Phi= 90
+ Theta= 135
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 4
+ R= 110
+ Phi= 90
+ Theta= 180
+ Beta= 0 0 0
+ASGARD Clover
+ CloverId= 5
+ R= 110
+ Phi= 90
+ Theta= 225
+ Beta= 0 0 0

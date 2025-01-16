@@ -1,0 +1,7 @@
+npsimulation -D ASGARD_STARKjr.detector -E 40Ar_coulex_197Au_pencil.reaction -B 152Eu_source.mac -O asgard_starkjr_40Ar_pencil
+
+npsimulation -D ASGARD_STARKjr_thinTarget.detector -E 40Ar_coulex_197Au_pencil.reaction -B 40Ar_coulex_thinTarget.mac -O asgard_starkjr_40Ar_thinTarget_pencilBeam
+
+npsimulation -D ASGARD_full_STARKjr.detector -E 24Mgdp.reaction -B 152Eu_source.mac -O asgard_full_starkjr_24Mg_dp_1cm_beam_10MeVu
+
+npsimulation -D ASGARD_STARKjr.detector -E 40Ar_coulex_197Au_10MeVu_pencil.reaction -B 152Eu_source.mac -O asgard_starkjr_40Ar_10MeVu_pencil

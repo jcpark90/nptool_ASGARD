@@ -1,0 +1,185 @@
+TChain* tfatima;
+TChain* tkhala;
+TChain* ttigress;
+
+
+TChain* teu; // tree for 152Eu data
+#include <TTreeReader.h>
+#include <TTreeReaderValue.h>
+#include <TTreeReaderArray.h>
+#include "TFatimaData.h"
+#include "TTigressData.h"
+
+const double E152EU_HPGE[11] = {244,  867, 964, 1112, 1408, 411, 778, 1299, 122, 40, 344};
+const double I152EU_HPGE[11] = {7.5,  4.2, 14.5, 13.6, 21, 2.234, 12.942,  1.623, 28.58, 59.4, 26.5};
+double n152EU_HPGE[11] = {260, 40, 100, 80, 80, 80, 150, 10, 500, 1000, 1000}; // when rebinned to 5
+double b152EU_HPGE[11] = {10,  10, 10, 10, 10, 10, 10, 10, 10, 50, 50}; // when rebinned to 5
+TF1* f152eu_hpge[11];
+
+
+TH1D* hfatima[33];
+TH1D* hkhala[33];
+TH1D* hidaten[33];
+TH1D* hhpge[33];
+
+TH1D* h152eu;
+TH1D* h152eu_hpge;
+TH1D* h152eu_khala;
+TH1D* h152eu_fatima;
+
+
+TF1* ffatima[33];
+TF1* fkhala[33];
+TF1* fidaten[33];
+TF1* fhpge[33];
+
+TGraphErrors* gfatima;
+TGraphErrors* gkhala;
+TGraphErrors* gidaten;
+TGraphErrors* ghpge;
+TGraphErrors* g152eu_idaten;
+TGraphErrors* g152eu_fatima;
+TGraphErrors* g152eu_hpge;
+TGraphErrors* g152eu_khala;
+
+TTreeReader fReader;
+
+
+
+const double EGATE1 = 0.122;
+const double EWIND1 = 0.020; // 20 keV
+
+const double EGATE2 = 0.344;
+const double EWIND2 = 0.030; // 30 keV
+
+double GetCountsHpge(TH1D* hhpge, double energy, double rebin){
+  double integral = 0;
+  for(int i = 0; i < hhpge->GetNbinsX();i++){
+    if (fabs(hhpge->GetBinCenter(i)-energy) < rebin*2)
+      integral+=hhpge->GetBinContent(i);
+  }
+  return integral;
+}
+
+void calib_decay_station_152Eu(int ncl, int dist){
+  gStyle->SetOptStat(0);
+
+  teu = new TChain("SimulatedTree");
+  teu->Add(Form("decay_station_%dcl_%dcm_152Eu_source.root", ncl, dist));
+  
+  fReader.SetTree(teu);
+  
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+  
+  TCanvas* cc = new TCanvas("cc", "cc", 1800, 600);
+  cc->Divide(2,2);
+  ttigress = new TChain("SimulatedTree");
+  
+  ghpge = new TGraphErrors();
+  ghpge->SetMarkerSize(1.3);
+  ghpge->SetMarkerStyle(20);
+  ghpge->SetMarkerColor(2);
+  ghpge->SetLineColor(2);
+ 
+  
+  h152eu_hpge = new  TH1D("h152Eu_hpge", "", 1500, 0, 1500);
+  h152eu_hpge->SetLineColor(6);
+
+  
+  teu->Project("h152Eu_hpge", "Tigress.fTIG_Ge_Energy");
+  
+		 
+  TCanvas* cg = new TCanvas("cg", "cg", 1200, 800);
+  cg->cd()->SetGridx(1);
+  cg->cd()->SetGridy(1);
+  ghpge->Draw("alp");
+  ghpge->GetYaxis()->SetRangeUser(0, 0.21);
+  ghpge->GetXaxis()->SetLimits(0, 4100);
+  ghpge->GetXaxis()->SetTitle("Energy (keV)");
+  ghpge->GetYaxis()->SetTitle("Absolute efficiency");
+  
+  ghpge->GetXaxis()->CenterTitle();
+  ghpge->GetYaxis()->CenterTitle();
+
+  
+  
+  TCanvas* c152eu = new TCanvas("c152eu", "c152eu", 1200, 800);
+  //  c152eu->cd()->SetLogy(1);
+  h152eu_hpge->SetLineColor(1);
+  h152eu_hpge->Draw("hist");
+  
+  
+  h152eu_hpge->GetXaxis()->SetTitle("Energy (keV)");
+  h152eu_hpge->GetXaxis()->CenterTitle();
+
+  TLegend* leg152 = new TLegend(0.55, 0.6, 0.9, 0.9);
+  leg152->AddEntry(h152eu_hpge, "^{152}Eu HPGe clovers", "l");
+  
+  leg152->Draw();
+  c152eu->SaveAs(Form("idaten_hpge_%dcl_%dcm_152Eu_spectrum.png", ncl, dist));
+  
+  
+  leg152->Draw();
+  
+  g152eu_hpge = new TGraphErrors();
+
+  double n1290 = 0;
+  double dn1290 = 0;
+
+  for(int i = 0; i < 11; i++){
+    if (i==9) //40 keV
+      f152eu_hpge[i] = new TF1(Form("f152eu_hpge%d", i), "gaus(0)+pol1(3)", E152EU_HPGE[i]-3, E152EU_HPGE[i]+3);
+    else
+      f152eu_hpge[i] = new TF1(Form("f152eu_hpge%d", i), "gaus(0)+pol1(3)", E152EU_HPGE[i]-15, E152EU_HPGE[i]+15);
+    
+    f152eu_hpge[i]->SetLineColor(6);
+    f152eu_hpge[i]->SetParameter(0, n152EU_HPGE[i]);
+    f152eu_hpge[i]->SetParameter(1, E152EU_HPGE[i]);
+    f152eu_hpge[i]->SetParameter(2, 2);
+    f152eu_hpge[i]->SetParameter(3, b152EU_HPGE[i]);
+    h152eu_hpge->Fit(f152eu_hpge[i], "QRN0");
+    f152eu_hpge[i]->Draw("same");
+    //1e4 for 1e6 events since the intensities are given in % [scaled 1e2]
+    g152eu_hpge->SetPoint(i, E152EU_HPGE[i], fabs(sqrt(2*M_PI)*f152eu_hpge[i]->GetParameter(2)*f152eu_hpge[i]->GetParameter(0)/I152EU_HPGE[i]/1e4));
+    g152eu_hpge->SetPointError(i, 0,  g152eu_hpge->GetY()[i]*f152eu_hpge[i]->GetParError(0)/f152eu_hpge[i]->GetParameter(0));
+  }
+  
+  cg->cd();
+  g152eu_hpge->SetMarkerStyle(25);
+  g152eu_hpge->SetMarkerColor(1);
+  g152eu_hpge->SetMarkerSize(1.3);
+  g152eu_hpge->GetYaxis()->SetRangeUser(0, 0.05);
+  g152eu_hpge->GetXaxis()->SetTitle("Energy (keV)");
+  g152eu_hpge->GetYaxis()->SetTitle("Absolute efficiency (singles)");
+  g152eu_hpge->GetXaxis()->CenterTitle();
+  g152eu_hpge->GetYaxis()->CenterTitle();
+  
+  g152eu_hpge->Draw("ap");
+  TF1* feff = new TF1("feff", "exp([0]+[1]*log(x)+[2]*(log(x))**2+[3]*(log(x))**3+[4]*(log(x))**4+[5]*(log(x))**5)", 30, 1500); // 4th order polynomial
+  feff->SetParameter(0, -50);
+  feff->SetParameter(1, 0.001);
+  feff->SetParLimits(5, -1, 0);
+  
+  g152eu_hpge->Fit(feff, "QR0N");
+  cout<<"P0: "<<feff->GetParameter(0)<<endl;
+  cout<<"P1: "<<feff->GetParameter(1)<<endl;
+  cout<<"P2: "<<feff->GetParameter(2)<<endl;
+  cout<<"P3: "<<feff->GetParameter(3)<<endl;
+  cout<<"P4: "<<feff->GetParameter(4)<<endl;
+  cout<<"P5: "<<feff->GetParameter(5)<<endl;
+  
+  feff->Draw("same");
+  
+  TLegend* legend = new TLegend(0.5, 0.75, 0.9, 0.9);
+  legend->AddEntry(g152eu_hpge, Form("^{152}Eu singles, %d clovers at %d cm", ncl, dist), "p");
+    
+  legend->Draw();
+  cg->SaveAs(Form("hpge_%dcl_%dcm_152Eu_singles_efficiency.png", ncl, dist));
+  
+  // cg->cd()->SetLogx(1);
+  // gidaten->GetYaxis()->SetNdivisions(11, 5, 0);
+  // gidaten->GetYaxis()->SetRangeUser(0, 0.21);
+  // cg->SaveAs("idaten_hpge_152Eu_singles_efficiency_logx.png");
+  
+  //  cs->SaveAs("idaten_138La_bgd_response.png");
+}

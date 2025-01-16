@@ -1,0 +1,505 @@
+TChain* tfatima;
+TChain* tkhala;
+TChain* ttigress;
+const int NBINS_COR = 100;
+const double KHALA_THETA[46] = {60, 60, 60, 60, 60, 60, 60, 60, 60, // 9
+				80, 80, 80, 80, 80, 80, 80,         // 7
+				100, 100, 100, 100, 100, 100, 100,  // 7
+				120, 120, 120, 120, 120, 120, 120, 120, 120, // 9
+				140, 140, 140, 140, 140, // 5
+				40, 40, 40, 40, 40, 40, 40, 40, 40}; // 9
+const double KHALA_PHI[46] = {10, 50, 90, 130, 170, 210, 250, 290, 330,
+			      30, 70, 110, 150, 230, 270, 310,
+			      50, 90, 130, 210, 250, 290, 330,
+			      30, 70, 110, 150, 190, 230, 270, 310, 350,
+			      -150, -70, 10, 90, 170,
+			      -170, -130, -90, -50, -10, 30, 70, 110, 150};
+
+const double FATIMA_THETA[36] = {60, 60, 60, 60, 60, 60, 60, 60, 60, // 9
+				 80, 80, 80, 80, 80, 80, 80,         // 7
+				 100, 100, 100, 100, 100, 100, 100,  // 7
+				 120, 120, 120, 120, 120, 120, 120, 120, 120, // 9
+				 140, 140, 140, 140}; // 4
+const double FATIMA_PHI[36] = {30, 70, 110, 150, 190, 230, 270, 310, 350,
+			       50, 90, 130, 210, 250, 290, 330,
+			       30, 70, 110, 150, 230, 270, 310,
+			       10, 50, 90, 130, 170, 210, 250, 290, 330,
+			       -110, -30, 50, 130};
+
+
+TChain* teu_iso;
+TChain* teu_cor;
+#include <TTreeReader.h>
+#include <TTreeReaderValue.h>
+#include <TTreeReaderArray.h>
+#include "TFatimaData.h"
+#include "TTigressData.h"
+
+TH1D* hdt_idaten;
+TTreeReader fReader;
+void GetGammaProjectionLaBr3WithPlastic(TTree* tr, TH1D* hout, double egate, double ewind){
+  fReader.SetTree(tr);
+  fReader.Restart();
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+  TTreeReaderValue<TPlasticData> Plastic = {fReader, "Plastic"};
+
+  long long i = 0;
+
+  while(fReader.Next()){           
+    i++;
+    bool coinc = 0;
+    int index_fatima = -1;
+    int index_khala = -1;
+    
+    if((i % 100000)==0) cout << i << endl;
+    if (Plastic->GetMult() > 0){
+      for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+	if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-egate) < ewind){ // start gamma in index m
+	  coinc = 1;
+	  index_fatima = n;
+	  break;
+	}
+      }
+      if (!coinc){
+	for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+	  if (fabs(Khala->GetKhalaLaBr3EEnergy(n)-egate) < ewind){ // start gamma in index n
+	    coinc = 1;
+	    index_khala = n;
+	    break;
+	  }
+	}
+      }
+      else{
+	for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+	  if (n==index_fatima) continue;
+	  else
+	    hout->Fill(Fatima->GetFatimaLaBr3EEnergy(n));
+	}
+	for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+	  if (n==index_khala) continue;
+	  else
+	    hout->Fill(Khala->GetKhalaLaBr3EEnergy(n));
+	}
+	
+      }
+    }
+    
+  }
+  return hout;
+}
+void GetGammaProjectionLaBr3(TTree* tr, TH1D* hout, double egate, double ewind){
+  fReader.SetTree(tr);
+  fReader.Restart();
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+  long long i = 0;
+
+  while(fReader.Next()){           
+    i++;
+    bool coinc = 0;
+    int index_fatima = -1;
+    int index_khala = -1;
+    
+    if((i % 100000)==0) cout << i << endl;
+    for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+      if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-egate) < ewind){ // start gamma in index m
+	coinc = 1;
+	index_fatima = n;
+	break;
+      }
+    }
+    if (!coinc){
+      for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+	if (fabs(Khala->GetKhalaLaBr3EEnergy(n)-egate) < ewind){ // start gamma in index n
+	  coinc = 1;
+	  index_khala = n;
+	  break;
+	}
+      }
+    }
+    else{
+      for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+	if (n==index_fatima) continue;
+	else
+	  hout->Fill(Fatima->GetFatimaLaBr3EEnergy(n));
+      }
+      for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+	if (n==index_khala) continue;
+	else
+	  hout->Fill(Khala->GetKhalaLaBr3EEnergy(n));
+      }
+      
+    }
+    
+  }
+  return hout;
+}
+double GetAngleFatimaFatima(int index_fatima1, int index_fatima2){
+  TVector3 v1(1, 0, 0);
+  TVector3 v2(1, 0, 0);
+  v1.SetTheta(FATIMA_THETA[index_fatima1]*M_PI/180.);
+  v1.SetPhi(FATIMA_PHI[index_fatima1]*M_PI/180.);
+  v2.SetTheta(FATIMA_THETA[index_fatima2]*M_PI/180.);
+  v2.SetPhi(FATIMA_PHI[index_fatima2]*M_PI/180.);
+  //  return cos(v1.Angle(v2)*180./M_PI);
+  return v1.Dot(v2);  
+}
+double GetAngleKhalaKhala(int index_khala1, int index_khala2){
+   TVector3 v1(1, 0, 0);
+   TVector3 v2(1, 0, 0);
+  v1.SetTheta(KHALA_THETA[index_khala1]*M_PI/180.);
+  v1.SetPhi(KHALA_PHI[index_khala1]*M_PI/180.);
+  v2.SetTheta(KHALA_THETA[index_khala2]*M_PI/180.);
+  v2.SetPhi(KHALA_PHI[index_khala2]*M_PI/180.);
+  return v1.Dot(v2);
+}
+double GetAngleFatimaKhala(int index_fatima, int index_khala){ // order should not matter
+  TVector3 v1(1, 0, 0);
+  TVector3 v2(1, 0, 0);
+  v1.SetTheta(FATIMA_THETA[index_fatima]*M_PI/180.);
+  v1.SetPhi(FATIMA_PHI[index_fatima]*M_PI/180.);
+  v2.SetTheta(KHALA_THETA[index_khala]*M_PI/180.);
+  v2.SetPhi(KHALA_PHI[index_khala]*M_PI/180.);
+  //return cos(v1.Angle(v2)*180./M_PI);
+  return v1.Dot(v2);
+}
+
+void GetGammaProjectionHPGe(TTree* tr, TH1D* hout, double egate, double ewind){
+  fReader.SetTree(tr);
+  fReader.Restart();
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+  long long i = 0;
+
+  while(fReader.Next()){           
+    i++;
+    bool coinc = 0;
+    if((i % 100000)==0) cout << i << endl;
+    for(int n = 0; n < Tigress->GetMultiplicityGe();n++){
+      //      cout<<Tigress->GetGeEnergy(n)<<endl;
+      if (fabs(Tigress->GetGeEnergy(n)-egate)<ewind){
+	coinc = 1;
+	break;
+      }
+    }
+   
+    if(coinc){
+      for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+	hout->Fill(Fatima->GetFatimaLaBr3EEnergy(n));
+      }
+      for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+	hout->Fill(Khala->GetKhalaLaBr3EEnergy(n));
+      }
+      
+    }
+    
+  }
+  return hout;
+}
+
+void GetStartStopHist(TTree* tr, TH1D* hout, double estart, double ewind_start, double estop, double ewind_stop){
+  fReader.SetTree(tr);
+  fReader.Restart();
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+ 
+  long long i = 0;
+  
+  while(fReader.Next()){           
+    i++;
+    if((i % 100000)==0) cout << i << endl;
+    for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){      
+      for(int m = n+1; m < Fatima->GetFatimaLaBr3EMult(); m++){  
+      	if (fabs(Fatima->GetFatimaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m
+	    && fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estop) < ewind_stop) // stop gamma in index n
+      	  hout->Fill(Fatima->GetFatimaLaBr3TTime(n)-Fatima->GetFatimaLaBr3TTime(m));
+      	else if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n
+		 && fabs(Fatima->GetFatimaLaBr3EEnergy(m)-estop) < ewind_stop) // stop gamma in index m 
+      	  hout->Fill(Fatima->GetFatimaLaBr3TTime(m)-Fatima->GetFatimaLaBr3TTime(n));
+      }
+    }
+    for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+      for(int m = n+1; m < Khala->GetKhalaLaBr3EMult(); m++){  
+       	if (fabs(Khala->GetKhalaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m
+	    && fabs(Khala->GetKhalaLaBr3EEnergy(n)-estop) < ewind_stop) // stop gamma in index n
+      	  hout->Fill(Khala->GetKhalaLaBr3TTime(n)-Khala->GetKhalaLaBr3TTime(m));
+      	else if (fabs(Khala->GetKhalaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n
+		 && fabs(Khala->GetKhalaLaBr3EEnergy(m)-estop) < ewind_stop) // stop gamma in index m
+      	  hout->Fill(Khala->GetKhalaLaBr3TTime(m)-Khala->GetKhalaLaBr3TTime(n));
+      	
+      }
+    }
+    //    loop through coincidence data for mixed detector types
+    for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+      for(int m = 0; m < Khala->GetKhalaLaBr3EMult(); m++){
+     	if (fabs(Khala->GetKhalaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m for khala
+	    && fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estop) < ewind_stop) // stop gamma in index n for fatima
+      	  hout->Fill(Fatima->GetFatimaLaBr3TTime(n)-Khala->GetKhalaLaBr3TTime(m));
+      	else if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n for fatima
+		 && fabs(Khala->GetKhalaLaBr3EEnergy(m)-estop) < ewind_stop) // stop gamma in index m for khala
+      	  hout->Fill(Khala->GetKhalaLaBr3TTime(m)-Fatima->GetFatimaLaBr3TTime(n));
+      }
+    }
+
+  }
+  return hout;
+}
+// find detector numbers to check angular correlation
+// detector number convention is 0-35 FATIMA (36 detectors), 36-81 KHALA (46 detectors, shifted up by 36)
+// mout is x-axis start detector number vs y-axis stop detector number
+void GetStartStopCorrelation(TTree* tr, TH2I* mout, TH1D* hout, double estart, double ewind_start, double estop, double ewind_stop){
+  fReader.SetTree(tr);
+  fReader.Restart();
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+ 
+  long long i = 0;
+  
+  while(fReader.Next()){           
+    i++;
+    if((i % 100000)==0) cout << i << endl;
+    for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){      
+      for(int m = n+1; m < Fatima->GetFatimaLaBr3EMult(); m++){  
+      	if (fabs(Fatima->GetFatimaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m
+	    && fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estop) < ewind_stop){ // stop gamma in index n
+      	  mout->Fill(Fatima->GetFatimaLaBr3EDetectorNbr(m), Fatima->GetFatimaLaBr3EDetectorNbr(n));
+	  hout->Fill(GetAngleFatimaFatima(Fatima->GetFatimaLaBr3EDetectorNbr(m), Fatima->GetFatimaLaBr3EDetectorNbr(n)));
+	}
+      	else if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n
+		 && fabs(Fatima->GetFatimaLaBr3EEnergy(m)-estop) < ewind_stop){ // stop gamma in index m 
+      	  mout->Fill(Fatima->GetFatimaLaBr3EDetectorNbr(n), Fatima->GetFatimaLaBr3EDetectorNbr(m));
+	  hout->Fill(GetAngleFatimaFatima(Fatima->GetFatimaLaBr3EDetectorNbr(m), Fatima->GetFatimaLaBr3EDetectorNbr(n)));
+	}
+      } 
+    }
+    for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+      for(int m = n+1; m < Khala->GetKhalaLaBr3EMult(); m++){  
+       	if (fabs(Khala->GetKhalaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m
+	    && fabs(Khala->GetKhalaLaBr3EEnergy(n)-estop) < ewind_stop){ // stop gamma in index n
+      	  mout->Fill(Khala->GetKhalaLaBr3EDetectorNbr(m)+36, Khala->GetKhalaLaBr3EDetectorNbr(n)+36);
+	  hout->Fill(GetAngleKhalaKhala(Khala->GetKhalaLaBr3EDetectorNbr(m), Khala->GetKhalaLaBr3EDetectorNbr(n)));
+	}
+      	else if (fabs(Khala->GetKhalaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n
+		 && fabs(Khala->GetKhalaLaBr3EEnergy(m)-estop) < ewind_stop){ // stop gamma in index m
+      	  mout->Fill(Khala->GetKhalaLaBr3EDetectorNbr(n)+36, Khala->GetKhalaLaBr3EDetectorNbr(m)+36);
+	  hout->Fill(GetAngleKhalaKhala(Khala->GetKhalaLaBr3EDetectorNbr(m), Khala->GetKhalaLaBr3EDetectorNbr(n)));	  
+	}
+      }
+    }
+    //    loop through coincidence data for mixed detector types
+    for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+      for(int m = 0; m < Khala->GetKhalaLaBr3EMult(); m++){
+     	if (fabs(Khala->GetKhalaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m for khala
+	    && fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estop) < ewind_stop){ // stop gamma in index n for fatima
+      	  mout->Fill(Khala->GetKhalaLaBr3EDetectorNbr(m)+36,Fatima->GetFatimaLaBr3EDetectorNbr(n));
+	  hout->Fill(GetAngleFatimaKhala(Fatima->GetFatimaLaBr3EDetectorNbr(n), Khala->GetKhalaLaBr3EDetectorNbr(m)));	  
+	}
+      	else if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n for fatima
+		 && fabs(Khala->GetKhalaLaBr3EEnergy(m)-estop) < ewind_stop){ // stop gamma in index m for khala
+      	  mout->Fill(Fatima->GetFatimaLaBr3EDetectorNbr(n),Khala->GetKhalaLaBr3EDetectorNbr(m)+36);
+	  hout->Fill(GetAngleFatimaKhala(Fatima->GetFatimaLaBr3EDetectorNbr(n), Khala->GetKhalaLaBr3EDetectorNbr(m)));	  
+	}
+      }
+    }
+
+  }
+  //  return mout;
+}
+void GetStartStopHistWithGamma(TTree* tr, TH1D* hout, double estart, double ewind_start, double estop, double ewind_stop, double egam, double ewind_gam){
+  fReader.SetTree(tr);
+  fReader.Restart();
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+ 
+  long long i = 0;
+  while(fReader.Next()){           
+    i++;
+    bool gamma_gated = 0;
+    //   cout<<Tigress->GetMultiplicityGe()<<endl;
+    for(int n = 0; n < Tigress->GetMultiplicityGe();n++){
+      //      cout<<Tigress->GetGeEnergy(n)<<endl;
+      if (fabs(Tigress->GetGeEnergy(n)-egam)<ewind_gam){
+	gamma_gated = 1;
+	break;
+      }
+    }
+    if (gamma_gated){
+      for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){      
+	for(int m = n+1; m < Fatima->GetFatimaLaBr3EMult(); m++){  
+	  if (fabs(Fatima->GetFatimaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m
+	      && fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estop) < ewind_stop) // stop gamma in index n
+	    hout->Fill(Fatima->GetFatimaLaBr3TTime(n)-Fatima->GetFatimaLaBr3TTime(m));
+	  else if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n
+		   && fabs(Fatima->GetFatimaLaBr3EEnergy(m)-estop) < ewind_stop) // stop gamma in index m 
+	    hout->Fill(Fatima->GetFatimaLaBr3TTime(m)-Fatima->GetFatimaLaBr3TTime(n));
+	}
+      }
+      for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+	for(int m = n+1; m < Khala->GetKhalaLaBr3EMult(); m++){  
+	  if (fabs(Khala->GetKhalaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m
+	      && fabs(Khala->GetKhalaLaBr3EEnergy(n)-estop) < ewind_stop) // stop gamma in index n
+	    hout->Fill(Khala->GetKhalaLaBr3TTime(n)-Khala->GetKhalaLaBr3TTime(m));
+	  else if (fabs(Khala->GetKhalaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n
+		   && fabs(Khala->GetKhalaLaBr3EEnergy(m)-estop) < ewind_stop) // stop gamma in index m
+	    hout->Fill(Khala->GetKhalaLaBr3TTime(m)-Khala->GetKhalaLaBr3TTime(n));
+	  
+	}
+      }
+      //    loop through coincidence data for mixed detector types
+      for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+	for(int m = 0; m < Khala->GetKhalaLaBr3EMult(); m++){
+	  if (fabs(Khala->GetKhalaLaBr3EEnergy(m)-estart) < ewind_start // start gamma in index m for khala
+	      && fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estop) < ewind_stop) // stop gamma in index n for fatima
+	    hout->Fill(Fatima->GetFatimaLaBr3TTime(n)-Khala->GetKhalaLaBr3TTime(m));
+	  else if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estart) < ewind_start   // start gamma in index n for fatima
+		   && fabs(Khala->GetKhalaLaBr3EEnergy(m)-estop) < ewind_stop) // stop gamma in index m for khala
+	    hout->Fill(Khala->GetKhalaLaBr3TTime(m)-Fatima->GetFatimaLaBr3TTime(n));
+	}
+      }
+
+    }
+  }
+  return hout;
+}
+void GetStartLaBr3StopGamma(TTree* tr, TH1D* hout, double estart, double ewind_start, double estop, double ewind_stop){
+  fReader.SetTree(tr);
+  fReader.Restart();
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+ 
+  long long i = 0;
+  bool gamma_gated = 0;
+  while(fReader.Next()){           
+    i++;
+    for(int n = 0; n < Fatima->GetFatimaLaBr3EMult(); n++){      
+      for(int m = 0; m < Tigress->GetMultiplicityGe(); m++){  
+	if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estart) < ewind_start // start gamma in index m
+	    && fabs(Tigress->GetGeEnergy(m)-estop) < ewind_stop) // stop gamma in index n
+	  hout->Fill(Tigress->GetGeTimeLED(m)-Fatima->GetFatimaLaBr3TTime(n));
+      }
+    }
+    for(int n = 0; n < Khala->GetKhalaLaBr3EMult(); n++){      
+      for(int m = 0; m < Tigress->GetMultiplicityGe(); m++){  
+	if (fabs(Khala->GetKhalaLaBr3EEnergy(n)-estart) < ewind_start // start gamma in index m
+	    && fabs(Tigress->GetGeEnergy(m)-estop) < ewind_stop) // stop gamma in index n
+	  hout->Fill(Tigress->GetGeTimeLED(m)-Khala->GetKhalaLaBr3TTime(n));
+      }
+    }
+    
+  }
+  return hout;
+}
+void GetStartStopHistWithPlastic(TTree* tr, TH1D* hout, double estop, double ewind_stop){
+  fReader.SetTree(tr);
+  fReader.Restart();
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+  TTreeReaderValue<TWAS3ABiData> Was3abi = {fReader, "WAS3ABi"};
+  TTreeReaderValue<TPlasticData> Plastic = {fReader, "Plastic"};
+
+  int i = 0;
+  
+  while(fReader.Next()){           
+    i++;
+    if((i % 100000)==0) cout << i << endl;
+    double tpl_temp = 1.e12;
+    for(int n = 0; n < Plastic->GetMult();n++){
+      if (Plastic->GetTime(n) < tpl_temp)
+	tpl_temp = Plastic->GetTime(n); // get the fastest time hit on the plastic detector
+    }
+    if (tpl_temp < 1.e12){ // check that we have a plastic hit in this event
+      for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+	if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-estop) < ewind_stop) 
+	  hout->Fill(Fatima->GetFatimaLaBr3TTime(n)-tpl_temp);
+      }
+      for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+      	if (fabs(Khala->GetKhalaLaBr3EEnergy(n)-estop) < ewind_stop) 
+	  hout->Fill(Khala->GetKhalaLaBr3TTime(n)-tpl_temp);
+      }
+    }    
+  }
+  //  return hout;
+}
+void GetLaBr3EnergySpectrum(TTree* tr, TH1D* hlabr3){
+  TH1D* hfatima = (TH1D*)hlabr3->Clone("hfatima");
+  TH1D* hkhala = (TH1D*)hlabr3->Clone("hkhala");
+  tr->Project("hfatima", "Fatima.fFATIMA_LaBr3_E_Energy");
+  tr->Project("hkhala", "Khala.fKHALA_LaBr3_E_Energy");
+  hlabr3->Add(hfatima);
+  hlabr3->Add(hkhala);
+}
+void GetLaBr3EnergySpectrumWithPlastic(TTree* tr, TH1D* hlabr3){
+  TH1D* hfatima = (TH1D*)hlabr3->Clone("hfatima");
+  TH1D* hkhala = (TH1D*)hlabr3->Clone("hkhala");
+  tr->Project("hfatima", "Fatima.fFATIMA_LaBr3_E_Energy", "Plastic.fPlastic_Time > 0");
+  tr->Project("hkhala", "Khala.fKHALA_LaBr3_E_Energy", "Plastic.fPlastic_Time > 0");
+  hlabr3->Add(hfatima);
+  hlabr3->Add(hkhala);
+}
+
+void GetHPGeEnergySpectrum(TTree* tr, TH1D* hHPGe){
+  tr->Project(hHPGe->GetName(), "Tigress.fTIG_Ge_Energy");
+}
+void GetHPGeEnergySpectrumWithPlastic(TTree* tr, TH1D* hHPGe){
+  tr->Project(hHPGe->GetName(), "Tigress.fTIG_Ge_Energy", "Plastic.fPlastic_Time > 0");
+}
+void start_stop_analysis_correlation(){
+  // gStyle->SetOptStat(0);
+
+  teu_cor = new TChain("SimulatedTree");
+  teu_cor->Add("60Co_cor.root");
+  //teu_cor->Add("152Eu_cor.root");
+  teu_iso = new TChain("SimulatedTree");
+  teu_iso->Add("60Co_iso.root");
+  TH2I* mc_idaten_cor = new TH2I("mc_idaten_cor", "", 84, 0, 84, 84, 0, 84);
+  TH1D* hc_idaten_cor = new TH1D("hc_idaten_cor", "", NBINS_COR, -1, 1);
+  TH2I* mc_idaten_iso = new TH2I("mc_idaten_iso", "", 84, 0, 84, 84, 0, 84);
+  TH1D* hc_idaten_iso = new TH1D("hc_idaten_iso", "", NBINS_COR, -1, 1);
+  GetStartStopCorrelation(teu_cor, mc_idaten_cor, hc_idaten_cor, 1173, 35, 1332, 40);
+  //  GetStartStopCorrelation(teu_cor, mc_idaten_cor, hc_idaten_cor, 1408, 40, 121, 12);
+  
+  GetStartStopCorrelation(teu_iso, mc_idaten_iso, hc_idaten_iso, 1173, 35, 1332, 40);
+  TH1D* hc_ref = new TH1D("hc_ref", "", NBINS_COR, -1, 1);
+  for(int i = 0; i < 36; i++){
+    for(int j = i+1; j < 36; j++){
+      hc_ref->Fill(GetAngleFatimaFatima(i, j));
+    }
+  }
+  for(int i = 0; i < 46; i++){
+    for(int j = i+1; j < 46; j++){
+      hc_ref->Fill(GetAngleKhalaKhala(i, j));
+    }
+  }
+  for(int i = 0; i < 36; i++){
+    for(int j = 0; j < 46; j++){
+      hc_ref->Fill(GetAngleFatimaKhala(i, j));
+    }
+  }
+
+  TCanvas* ccor = new TCanvas("ccor", "ccor", 1600, 800);
+  ccor->Divide(2,1);
+  ccor->cd(1);
+  mc_idaten_cor->Draw("COLZ");
+  ccor->cd(2);
+  hc_idaten_cor->SetLineColor(1);
+  hc_idaten_cor->Divide(hc_ref);
+  hc_idaten_cor->SetMarkerStyle(20);
+  hc_idaten_cor->Draw("p");
+  hc_idaten_iso->SetLineColor(2);
+  hc_idaten_iso->Divide(hc_ref);
+  hc_idaten_iso->SetMarkerStyle(21);
+  hc_idaten_iso->SetMarkerColor(2);
+  hc_idaten_iso->Draw("p same");
+  hc_idaten_cor->GetXaxis()->SetTitle("cos(#theta)");
+  cout<<"Angle: "<<acos(GetAngleKhalaKhala(0, 1))*180./M_PI<<endl;
+  ccor->SaveAs("idaten_correlated_gamma_angles_60Co.png");
+}

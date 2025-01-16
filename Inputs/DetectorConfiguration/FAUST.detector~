@@ -1,0 +1,179 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+GeneralTarget
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Target
+ THICKNESS= 4.8 micrometer
+ RADIUS=	5 mm
+ MATERIAL= CD2
+ ANGLE= 0 deg
+ X= 0 deg
+ Y= 0 deg
+ Z= 0 deg
+ 		
+%%%%%%% Telescope 2 %%%%%%% 		
+M2Telescope
+ THETA= -90 deg
+ PHI= 0 deg
+ R= 150 mm
+ BETA= 0 0 0 deg
+ SI= 1
+ SILI= 1
+ CSI= 1
+ VIS= all  
+
+
+%%%%%%% Telescope 2 %%%%%%% 		
+M2Telescope
+ THETA= 90 deg
+ PHI= 0 deg
+ R= 150 mm
+ BETA= 0 0 0 deg
+ SI= 1
+ SILI= 1
+ CSI= 1
+ VIS= all 
+
+
+%%%%%%% Telescope 2 %%%%%%% 		
+M2Telescope
+ THETA= 90 deg
+ PHI= 45 deg
+ R= 150 mm
+ BETA= 0 0 0 deg
+ SI= 1
+ SILI= 1
+ CSI= 1
+ VIS= all  
+
+%%%%%%% Telescope 2 %%%%%%% 		
+M2Telescope
+ THETA= 90 deg
+ PHI= -45 deg
+ R= 150 mm
+ BETA= 0 0 0 deg
+ SI= 1
+ SILI= 1
+ CSI= 1
+ VIS= all  
+
+%%%%%%% Telescope 2 %%%%%%% 		
+M2Telescope
+ THETA= 270 deg
+ PHI= 45 deg
+ R= 150 mm
+ BETA= 0 0 0 deg
+ SI= 1
+ SILI= 1
+ CSI= 1
+ VIS= all  
+
+%%%%%%% Telescope 2 %%%%%%% 		
+M2Telescope
+ THETA= 270 deg
+ PHI= -45 deg
+ R= 150 mm
+ BETA= 0 0 0 deg
+ SI= 1
+ SILI= 1
+ CSI= 1
+ VIS= all  
+%%%%%%% Telescope 2 %%%%%%% 		
+M2Telescope
+ THETA= 270 deg
+ PHI= -90 deg
+ R= 150 mm
+ BETA= 0 0 0 deg
+ SI= 1
+ SILI= 1
+ CSI= 1
+ VIS= all
+%%%%%%% Telescope 2 %%%%%%% 		
+M2Telescope
+ THETA= 90 deg
+ PHI= -90 deg
+ R= 150 mm
+ BETA= 0 0 0 deg
+ SI= 1
+ SILI= 1
+ CSI= 1
+ VIS= all
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%1 End-Cap Back
+GaspardTracker Trapezoid
+ X128_Y128= 41.963   21.364  -138.589
+ X1_Y128= 23.737   39.592  -138.591
+ X128_Y1= 122.368   54.712   -71.098
+ X1_Y1= 57.084  119.996   -71.098
+ FIRSTSTAGE= 1
+ SECONDSTAGE= 1
+ THIRDSTAGE= 1
+ VIS= all
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%2
+GaspardTracker Trapezoid
+ X128_Y128=     -41.963  -21.364  -138.589
+ X1_Y128=       -23.737  -39.592  -138.591
+ X128_Y1=	    -122.368  -54.712   -71.098
+ X1_Y1=		     -57.084 -119.996   -71.098
+ FIRSTSTAGE= 1
+ SECONDSTAGE= 1
+ THIRDSTAGE= 1
+ VIS= all
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%3
+GaspardTracker Trapezoid
+ X128_Y128=     -21.364   41.963  -138.589
+ X1_Y128=       -39.592   23.737  -138.591
+ X128_Y1=	     -54.712  122.368   -71.098
+ X1_Y1=		    -119.996   57.084   -71.098
+ FIRSTSTAGE= 1
+ SECONDSTAGE= 1
+ THIRDSTAGE= 1
+ VIS= all
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%4
+GaspardTracker Trapezoid
+ X128_Y128=      21.364  -41.963  -138.589
+ X1_Y128=        39.592  -23.737  -138.591
+ X128_Y1=	      54.712 -122.368   -71.098
+ X1_Y1=		     119.996  -57.084   -71.098
+ FIRSTSTAGE= 1
+ SECONDSTAGE= 1
+ THIRDSTAGE= 1
+ VIS= all
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%4
+GaspardTracker Trapezoid
+ X128_Y128=      -12.888  -44.809  -138.589
+ X1_Y128=        12.888  -44.809  -138.591
+ X128_Y1=	     -46.163 -125.224   -71.098
+ X1_Y1=		     46.163  -125.224   -71.098
+ FIRSTSTAGE= 1
+ SECONDSTAGE= 1
+ THIRDSTAGE= 1
+ VIS= all
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%4
+GaspardTracker Trapezoid
+ X128_Y128=      12.888  44.809  -138.589
+ X1_Y128=        -12.888  44.809  -138.591
+ X128_Y1=	     46.163 125.224   -71.098
+ X1_Y1=		     -46.163  125.224   -71.098
+ FIRSTSTAGE= 1
+ SECONDSTAGE= 1
+ THIRDSTAGE= 1
+ VIS= all
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%4
+GaspardTracker Trapezoid
+ X128_Y128=      44.809  -12.888  -138.589
+ X1_Y128=         44.809  12.888 -138.591
+ X128_Y1=	    125.224  -46.163   -71.098
+ X1_Y1=		      125.224  46.163  -71.098
+ FIRSTSTAGE= 1
+ SECONDSTAGE= 1
+ THIRDSTAGE= 1
+ VIS= all
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%4
+GaspardTracker Trapezoid
+ X128_Y128=      -44.809  12.888  -138.589
+ X1_Y128=         -44.809  -12.888 -138.591
+ X128_Y1=	    -125.224  46.163   -71.098
+ X1_Y1=		      -125.224  -46.163  -71.098
+ FIRSTSTAGE= 1
+ SECONDSTAGE= 1
+ THIRDSTAGE= 1
+ VIS= all

@@ -1,0 +1,1 @@
+npsimulation -D Miniball_110Sn.detector -E 152Eu.source -B macro_miniball_152Eu.mac -O miniball_110Sn_152Eu

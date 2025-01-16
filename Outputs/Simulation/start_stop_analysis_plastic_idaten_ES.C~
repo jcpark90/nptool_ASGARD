@@ -1,0 +1,103 @@
+TChain* tfatima;
+TChain* tkhala;
+TChain* ttigress;
+
+
+TChain* teu;
+#include <TTreeReader.h>
+#include <TTreeReaderValue.h>
+#include <TTreeReaderArray.h>
+#include "TFatimaData.h"
+#include "TTigressData.h"
+#include "TWAS3ABiData.h"
+#include "TPlasticData.h"
+
+
+TH1D* hdt_idaten;
+double EGATE_IDATEN;
+double EWIND_IDATEN;
+
+
+TTreeReader fReader;
+
+void start_stop_analysis_plastic_idaten(){
+
+
+  gStyle->SetOptStat(0);
+
+  // set 1 for 10 ps 9/2- state in 77Cu
+  EGATE_IDATEN = 946; // 946 keV to 5/2- state in 77Cu
+  EWIND_IDATEN = 40; // 40 keV
+  teu = new TChain("SimulatedTree");
+  teu->Add("idaten77cu_30ps_81ps.root");
+  fReader.SetTree(teu);
+
+
+  int nbin = 100;
+  double bmin = -6000;
+  double bmax = 4000;
+  double bin = (bmax - bmin)/nbin;
+
+  hdt_idaten = new TH1D("hdt_idaten", "", nbin, bmin, bmax); // start-stop time difference histogram
+
+  TTreeReaderValue<TFatimaData> Fatima = {fReader, "Fatima"};
+  TTreeReaderValue<TKhalaData> Khala = {fReader, "Khala"};
+  TTreeReaderValue<TTigressData> Tigress = {fReader, "Tigress"};
+  TTreeReaderValue<TWAS3ABiData> Was3abi = {fReader, "WAS3ABi"};
+  TTreeReaderValue<TPlasticData> Plastic = {fReader, "Plastic"};
+
+
+
+  int i = 0;
+
+  while(fReader.Next()){
+    i++;
+    if((i % 100000)==0) cout << i << endl;
+    double tpl_temp = 1.e13;
+    for(int n = 0; n < Plastic->GetMult();n++){
+      if (Plastic->GetTime(n) < tpl_temp)
+	tpl_temp = Plastic->GetTime(n); // get the fastest time hit on the plastic detector
+    }
+    if (tpl_temp < 1.e13){ // check that we have a plastic hit in this event
+      for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+	if (fabs(Fatima->GetFatimaLaBr3EEnergy(n)-EGATE_IDATEN) < EWIND_IDATEN)
+	  hdt_idaten->Fill((Fatima->GetFatimaLaBr3TTime(n)-tpl_temp)*1000);
+      }
+      for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+      	if (fabs(Khala->GetKhalaLaBr3EEnergy(n)-EGATE_IDATEN) < EWIND_IDATEN)
+	  hdt_idaten->Fill((Khala->GetKhalaLaBr3TTime(n)-tpl_temp)*1000);
+      }
+    }
+  }
+  TCanvas* cc = new TCanvas("cc", "cc", 1200, 800);
+//cc->SetLogy();
+  hdt_idaten->SetLineColor(1);
+  hdt_idaten->GetXaxis()->SetTitle("T_{labr3}-T_{plastic} (ps)");
+hdt_idaten->GetYaxis()->SetTitle( Form("Counts / %.0f ps", bin) );
+
+  hdt_idaten->Draw("hist");
+hdt_idaten->GetYaxis()->SetRangeUser(0.5, 1050);
+  // simple exponential fit with background
+  //  TF1* fhalf = new TF1("fhalf", "[0]*0.5**(x/[1])+[2]", 0, 50);
+  // fhalf->SetParameter(0, 25);
+  // fhalf->SetParameter(1, 7.5);
+  // fhalf->SetParameter(2, 1);
+
+  // incorporate time jitter into the T1/2 fit, which results in an exponentially modified gaussian
+
+  TF1* fhalf;
+  fhalf = new TF1("fhalf", "[1]*(exp(0.5*(log(2)/[0])*((log(2)/[0])*[2]**2-2*x))*TMath::Erfc(((log(2)/[0])*[2]**2-x)/(sqrt(2)*[2])))", -920, 1100);
+  fhalf->SetParameter(0, 30);
+  fhalf->SetParameter(1, 2000);
+  fhalf->SetParameter(2, 1);
+
+  hdt_idaten->Fit(fhalf, "QRN0");
+  fhalf->Draw("same");
+
+  TLatex* latex = new TLatex();
+  latex->SetTextSize(0.03);
+  latex->DrawLatex(-5000, 900, "^{77}Cu from ^{77}Ni #beta- decay: beta(start), 946-keV gamma(stop)");
+  latex->DrawLatex(-5000, 800, Form("T_{1/2}(9/2^{-}) = %.3f #pm %.4f ps (Sim.)", fhalf->GetParameter(0),  fhalf->GetParError(0)));
+  latex->DrawLatex(-5000, 700, Form("T_{1/2}(9/2^{-}) = %.2f ps (Geant4 ENSDF)", 30.));
+  cc->SaveAs("start_stop_analysis_77Cu_9halfminus.png");
+}

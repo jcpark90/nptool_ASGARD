@@ -1,0 +1,2 @@
+add_library(NPSWAS3ABi SHARED  WAS3ABi.cc)
+target_link_libraries(NPSWAS3ABi NPSCore ${ROOT_LIBRARIES} ${Geant4_LIBRARIES} ${NPLib_LIBRARIES} -lNPWAS3ABi)

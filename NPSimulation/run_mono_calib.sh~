@@ -1,0 +1,37 @@
+#!/bin/bash
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_30keV.source -O idaten_hpge_magnet_extended_30keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_40keV.source -O idaten_hpge_magnet_extended_40keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_50keV.source -O idaten_hpge_magnet_extended_50keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_60keV.source -O idaten_hpge_magnet_extended_60keV.root -B idaten_calib.mac;
+wait
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_70keV.source -O idaten_hpge_magnet_extended_70keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_80keV.source -O idaten_hpge_magnet_extended_80keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_90keV.source -O idaten_hpge_magnet_extended_90keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_100keV.source -O idaten_hpge_magnet_extended_100keV.root -B idaten_calib.mac;
+wait
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_150keV.source -O idaten_hpge_magnet_extended_150keV.root -B idaten_calib.mac & 
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_200keV.source -O idaten_hpge_magnet_extended_200keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_250keV.source -O idaten_hpge_magnet_extended_250keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_300keV.source -O idaten_hpge_magnet_extended_300keV.root -B idaten_calib.mac;
+wait
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_400keV.source -O idaten_hpge_magnet_extended_400keV.root -B idaten_calib.mac & 
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_500keV.source -O idaten_hpge_magnet_extended_500keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_600keV.source -O idaten_hpge_magnet_extended_600keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_700keV.source -O idaten_hpge_magnet_extended_700keV.root -B idaten_calib.mac;
+wait
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_800keV.source -O idaten_hpge_magnet_extended_800keV.root -B idaten_calib.mac & 
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_900keV.source -O idaten_hpge_magnet_extended_900keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1000keV.source -O idaten_hpge_magnet_extended_1000keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1100keV.source -O idaten_hpge_magnet_extended_1100keV.root -B idaten_calib.mac;
+wait
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1200keV.source -O idaten_hpge_magnet_extended_1200keV.root -B idaten_calib.mac & 
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1300keV.source -O idaten_hpge_magnet_extended_1300keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1400keV.source -O idaten_hpge_magnet_extended_1400keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1500keV.source -O idaten_hpge_magnet_extended_1500keV.root -B idaten_calib.mac;
+wait
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1600keV.source -O idaten_hpge_magnet_extended_1600keV.root -B idaten_calib.mac & 
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1700keV.source -O idaten_hpge_magnet_extended_1700keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1800keV.source -O idaten_hpge_magnet_extended_1800keV.root -B idaten_calib.mac &
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_1900keV.source -O idaten_hpge_magnet_extended_1900keV.root -B idaten_calib.mac;
+wait
+npsimulation -D ../Inputs/DetectorConfiguration/IDATEN_HPGe_MagnetAssembly_extended.detector -E ../Inputs/EventGenerator/gamma_2000keV.source -O idaten_hpge_magnet_extended_2000keV.root -B idaten_calib.mac

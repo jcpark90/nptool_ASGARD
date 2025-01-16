@@ -1,0 +1,4 @@
+TChain* tc;
+void asgard_starkjr_analysis(){
+  tc = new TChain("SimulatedTree");
+}

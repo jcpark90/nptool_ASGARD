@@ -1,0 +1,49 @@
+npsimulation -D IDATEN_HPGe_passive.detector -E 94Pd_isomer.source -B macro_idaten.mac -O idaten_94Pd
+npsimulation -D IDATEN_HPGe_passive.detector -E 96Pd_isomer.source -B macro_idaten.mac -O idaten_96Pd
+npsimulation -D IDATEN_HPGe_passive.detector -E 130Cd_isomer.source -B macro_idaten.mac -O idaten_130Cd
+npsimulation -D IDATEN_HPGe_passive.detector -E 76Ni_isomer.source -B macro_idaten.mac -O idaten_76Ni_test
+npsimulation -D IDATEN_HPGe_passive.detector -E 128Cd_isomer.source -B idaten_128Cd.mac -O idaten_128Cd
+npsimulation -D IDATEN_HPGe_passive.detector -E 96Ag_ion.source -B idaten_96Ag.mac -O idaten_96Ag
+npsimulation -D IDATEN_HPGe_passive.detector -E 138La_bgd.source -B idaten_138La_bgd.mac -O idaten_138La_bgd
+
+npsimulation -D IDATEN.detector -E 138La_bgd_fatima_120.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_fatima_120
+npsimulation -D IDATEN.detector -E 138La_bgd_khala_120.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_khala_120
+npsimulation -D IDATEN.detector -E 138La_bgd_fatima_100.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_fatima_100
+npsimulation -D IDATEN.detector -E 138La_bgd_khala_100.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_khala_100
+npsimulation -D IDATEN.detector -E 138La_bgd_fatima_80.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_fatima_80
+npsimulation -D IDATEN.detector -E 138La_bgd_khala_80.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_khala_80
+npsimulation -D IDATEN.detector -E 138La_bgd_fatima_60.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_fatima_60
+npsimulation -D IDATEN.detector -E 138La_bgd_khala_60.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_khala_60
+npsimulation -D IDATEN.detector -E 138La_bgd_fatima_40.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_fatima_40
+npsimulation -D IDATEN.detector -E 138La_bgd_khala_40.source -B idaten_138La_bgd.mac -O idaten_138La_bgd_khala_40
+
+
+npsimulation -D IDATEN_HPGe_WAS3ABi_plastic.detector -E 97Ag_decay.source -B 97Ag_decay.mac -O 97Ag_decay
+npsimulation -D IDATEN_HPGe_WAS3ABi_plastic.detector -E 96Cd_isomer.source -B 96Cd_isomer.mac -O 96Cd_isomer
+
+npsimulation -D asgard_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O asgard_152Eu_source
+npsimulation -D decay_station_8cl_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O asgard_152Eu_source
+npsimulation -D decay_station_4cl_11cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_11cm_152Eu_source
+npsimulation -D decay_station_4cl_12cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_12cm_152Eu_source
+npsimulation -D decay_station_4cl_13cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_13cm_152Eu_source
+npsimulation -D decay_station_4cl_14cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_14cm_152Eu_source
+npsimulation -D decay_station_4cl_15cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_15cm_152Eu_source
+npsimulation -D decay_station_4cl_16cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_16cm_152Eu_source
+npsimulation -D decay_station_4cl_17cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_17cm_152Eu_source
+npsimulation -D decay_station_4cl_18cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_18cm_152Eu_source
+npsimulation -D decay_station_4cl_19cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_19cm_152Eu_source
+npsimulation -D decay_station_4cl_20cm_starkjr.detector -E 152Eu.source -B 152Eu_source.mac -O decay_station_4cl_20cm_152Eu_source
+
+npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 96Pd_isomer.source -B idaten_96Pd.mac -O idaten_commissioning_96Pd
+npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 94Ru_isomer.source -B idaten_94Ru.mac -O idaten_commissioning_94Ru
+
+npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 94Pd_19minus_isomer.source -B idaten_94Pd_19minus.mac -O idaten_commissioning_94Pd_19minus
+npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 94Pd_14plus_isomer.source -B idaten_94Pd_14plus.mac -O idaten_commissioning_94Pd_14plus
+
+npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 93Pd_decay.source -B idaten_93Pd.mac -O idaten_commissioning_93Pd
+npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 95Ag_decay.source -B idaten_95Ag.mac -O idaten_commissioning_95Ag
+npsimulation -D IDATEN_HPGe_MaCi_commissioning.detector -E 93Pd_decay.source -B idaten_93Pd.mac -O idaten_commissioning_93Pd
+
+npsimulation -D Khala_2024MS_passive_2mm.detector -E gamma_500keV.source -B idaten_100k_events.mac -O khala_ball_MS2024_500keV
+npsimulation -D Khala_2024MS_passive_2mm.detector -E 152Eu.source -B idaten_152Eu.mac -O khala_ball_MS2024_152Eu_2mm
+npsimulation -D Khala_2024MS_passive_2mm.detector -E 60Co.source -B idaten_152Eu.mac -O khala_ball_MS2024_60Co_2mm

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for node in $(seq 1 1 5)
+do
+    sed "s/NODE/$node/g;" bqmap_template_para.sh > bqmap_E${node}_para.sh    
+done
+
+    

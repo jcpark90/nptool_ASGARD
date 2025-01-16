@@ -1,0 +1,37 @@
+%%%%%%%%%%%%%%%%%%%%%% KO-24-26 at IRIS %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Beam
+  Particle= 40Ar
+  ExcitationEnergy= 0 MeV
+  Energy= 400 MeV
+  SigmaEnergy= 0. MeV
+  SigmaThetaX= 0.0  deg
+  SigmaPhiY= 0.0    deg
+  SigmaX= 0 mm
+  SigmaY= 0 mm
+  MeanThetaX= 0 deg
+  MeanPhiY= 0 deg
+  MeanX= 0 mm
+  MeanY= 0 mm
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+TwoBodyReaction
+ Beam= 40Ar
+ Target= 197Au
+ Light= 40Ar
+ Heavy= 197Au
+ ExcitationEnergyLight= 1.461
+ ExcitationEnergyHeavy= 0.548
+  CrossSectionPath= flat.txt CSR
+ ShootLight= 1
+ ShootHeavy= 1
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  GammaCascade 40Ar
+    BranchingRatio= 100
+    Energies= 1.461
+    DifferentialCrossSection= 11Li(d,3He)10He.txt Gamma25Na
+ GammaCascade 197Au
+    BranchingRatio= 100
+    Energies= 0.548
+    DifferentialCrossSection= 11Li(d,3He)10He.txt Gamma25Na

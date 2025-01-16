@@ -1,0 +1,242 @@
+#define TestSel_cxx
+// The class definition in TestSel.h has been generated automatically
+// by the ROOT utility TTree::MakeSelector(). This class is derived
+// from the ROOT class TSelector. For more information on the TSelector
+// framework see $ROOTSYS/README/README.SELECTOR or the ROOT User Manual.
+
+
+// The following methods are defined in this file:
+//    Begin():        called every time a loop on the tree starts,
+//                    a convenient place to create your histograms.
+//    SlaveBegin():   called after Begin(), when on PROOF called only on the
+//                    slave servers.
+//    Process():      called for each event, in this function you decide what
+//                    to read and fill your histograms.
+//    SlaveTerminate: called at the end of the loop on the tree, when on PROOF
+//                    called only on the slave servers.
+//    Terminate():    called at the end of the loop on the tree,
+//                    a convenient place to draw/fit your histograms.
+//
+// To use this file, try the following session on your Tree T:
+//
+// root> T->Process("TestSel.C")
+// root> T->Process("TestSel.C","some options")
+// root> T->Process("TestSel.C+")
+//
+
+
+#include "TestSel.h"
+#include <TH2.h>
+#include <TStyle.h>
+// for 94Pd
+//const double EGATE = 0.096;
+//const double EWIND = 0.015; // 15 keV
+// for 96Pd
+// const double EGATE = 0.106;
+// const double EWIND = 0.015; // 15 keV
+// for 130Cd
+// const double EGATE = 0.133; // middle of 128 and 138 (unresolvable)
+// const double EWIND = 0.020; // 15+5 keV
+// for 128Cd
+// const double EGATE = 0.646;
+// const double EWIND = 0.030; // 20 keV
+// for 76Ni
+// const double EGATE = 0.144; 
+// const double EWIND = 0.016; // 16 keV
+
+// for 96Ag->96Pd
+const double EGATE = 0.106;
+const double EWIND = 0.010; // 10 keV
+const int A = 96;
+const char* ELEMENT = "Ag";
+const bool LOGY = 1;
+void TestSel::Begin(TTree * /*tree*/)
+{
+  // The Begin() function is called at the start of the query.
+  // When running with PROOF Begin() is only called on the client.
+  // The tree argument is deprecated (on PROOF 0 is passed).
+
+  TString option = GetOption();
+  gStyle->SetOptStat(0);
+}
+
+void TestSel::SlaveBegin(TTree * /*tree*/)
+{
+  // The SlaveBegin() function is called after the Begin() function.
+  // When running with PROOF SlaveBegin() is called on each slave server.
+  // The tree argument is deprecated (on PROOF 0 is passed).
+
+  TString option = GetOption();
+  //h0 = new TH1F("h0","168Gd Projection Spectrum for 100000 isomer decay",1024,0,1.5);
+  //h0->SetXTitle("E_{#gamma} [MeV]");
+  //h0->SetYTitle("Counts ");
+  hIdatenS = new TH1F("hIdatenS", Form("IDATEN singles and projections for ^{%d}%s isomer", A, ELEMENT), 750,0,1.5);
+  hIdatenS->SetXTitle("E_{#gamma} [MeV]");
+  hIdatenS->GetXaxis()->CenterTitle();
+  hIdatenS->SetYTitle("Counts / 0.002 MeV");  
+  hIdatenS->GetYaxis()->CenterTitle();
+
+  hKhalaS = new TH1F("hKhalaS","Simulated singles and projections (KHALA only)", 750,0,1.5);
+  hKhalaS->SetXTitle("E_{#gamma} [MeV]");
+  hKhalaS->SetYTitle("Counts / 0.002 MeV");  
+
+  hFatimaG = new TH1F("hFatimaG", "Simulated projections (FATIMA only)", 750,0,1.5);
+  hFatimaG->SetXTitle("E_{#gamma} [MeV]");
+  hFatimaG->SetYTitle("Counts / 0.002 MeV");  
+
+  hKhalaG = new TH1F("hKhalaG","Simulated projections (KHALA only)", 750,0,1.5);
+  hKhalaG->SetXTitle("E_{#gamma} [MeV]");
+  hKhalaG->SetYTitle("Counts / 0.002 MeV");  
+
+  ht = new TH1F("ht","Time difference", 700,0,3.5);
+  ht->SetXTitle("Time (us)");
+  ht->SetYTitle("Counts / 0.005 us");
+  
+  hIdatenG = new TH1F("hIdatenG",Form("Gammas from ^{%d}%s isomer, gated on %.3lf MeV", A, ELEMENT, EGATE),750,0,1.5);
+  hIdatenG->SetXTitle("E_{#gamma} [MeV]");
+  hIdatenG->SetYTitle("Counts / 0.002 MeV");
+  hIdatenG->GetXaxis()->CenterTitle();
+  hIdatenG->GetYaxis()->CenterTitle();
+
+  hFK = new TH1F("hFK",Form("Gated on %.3lf MeV", EGATE),750,0,1.5);
+  hFK->SetXTitle("E_{#gamma} [MeV]");
+  hFK->SetYTitle("Counts / 0.002 MeV");  
+  mIdaten = new TH2F("mIdaten", Form("#gamma-#gamma matrix for ^{%d}%s isomer", A, ELEMENT), 750,0,1.5,750,0,1.5);
+  mIdaten->SetXTitle("E_{#gamma} [MeV]");
+  mIdaten->SetYTitle("E_{#gamma} [MeV] "); 
+  mIdaten->GetXaxis()->CenterTitle();
+  mIdaten->GetYaxis()->CenterTitle();
+   
+}
+
+Bool_t TestSel::Process(Long64_t entry)
+{
+  // The Process() function is called for each entry in the tree (or possibly
+  // keyed object in the case of PROOF) to be processed. The entry argument
+  // specifies which entry in the currently loaded tree is to be processed.
+  // When processing keyed objects with PROOF, the object is already loaded
+  // and is available via the fObject pointer.
+  //
+  // This function should contain the \"body\" of the analysis. It can contain
+  // simple or elaborate selection criteria, run algorithms on the data
+  // of the event and typically fill histograms.
+  //
+  // The processing can be stopped by calling Abort().
+  //
+  // Use fStatus to set the return value of TTree::Process().
+  //
+  // The return value is currently not used.
+
+  int i =0;
+  // fReader.SetLocalEntry(entry);
+   
+  while(fReader.Next()){            // new addition for gamma-gamma from Rob 
+    i++;
+    if((i % 1000)==0)cout << i << endl;
+    for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+      hIdatenS->Fill(Fatima->GetFatimaLaBr3EEnergy(n));
+      for(int m = n+1; m < Fatima->GetFatimaLaBr3EMult(); m++){  
+	if (Fatima->GetFatimaLaBr3EEnergy(m)>EGATE-EWIND && Fatima->GetFatimaLaBr3EEnergy(m)<EGATE+EWIND){
+	  hIdatenG->Fill(Fatima->GetFatimaLaBr3EEnergy(n));
+	  //	  hFatimaG->Fill(Fatima->GetFatimaLaBr3EEnergy(n));
+
+	}
+	if (Fatima->GetFatimaLaBr3EEnergy(n)>EGATE-EWIND && Fatima->GetFatimaLaBr3EEnergy(n)<EGATE+EWIND){
+	  hIdatenG->Fill(Fatima->GetFatimaLaBr3EEnergy(m));
+	  //	  hFatimaG->Fill(Fatima->GetFatimaLaBr3EEnergy(m));
+	}
+	mIdaten->Fill(Fatima->GetFatimaLaBr3EEnergy(n), Fatima->GetFatimaLaBr3EEnergy(m));
+	//	mIdaten->Fill(Fatima->GetFatimaLaBr3EEnergy(m), Fatima->GetFatimaLaBr3EEnergy(n));
+      }
+    }
+    for(int n = 0; n < Khala->GetKhalaLaBr3EMult();n++){
+      hIdatenS->Fill(Khala->GetKhalaLaBr3EEnergy(n));
+      for(int m = n+1; m < Khala->GetKhalaLaBr3EMult(); m++){  
+    	if (Khala->GetKhalaLaBr3EEnergy(m)>EGATE-EWIND && Khala->GetKhalaLaBr3EEnergy(m)<EGATE+EWIND){
+    	  hIdatenG->Fill(Khala->GetKhalaLaBr3EEnergy(n));
+	  //	  hKhalaG->Fill(Khala->GetKhalaLaBr3EEnergy(n));
+    	}
+    	if (Khala->GetKhalaLaBr3EEnergy(n)>EGATE-EWIND && Khala->GetKhalaLaBr3EEnergy(n)<EGATE+EWIND){
+    	  hIdatenG->Fill(Khala->GetKhalaLaBr3EEnergy(m));
+	  //	  hKhalaG->Fill(Khala->GetKhalaLaBr3EEnergy(m));
+    	}
+    	mIdaten->Fill(Khala->GetKhalaLaBr3EEnergy(n), Khala->GetKhalaLaBr3EEnergy(m));
+	//    	mIdaten->Fill(Khala->GetKhalaLaBr3EEnergy(m), Khala->GetKhalaLaBr3EEnergy(n));
+      }
+    }
+    // loop through coincidence data for mixed detector types
+    for(int n = 0; n < Fatima->GetFatimaLaBr3EMult();n++){
+      for(int m = 0; m < Khala->GetKhalaLaBr3EMult(); m++){
+	if (Khala->GetKhalaLaBr3EEnergy(m)>EGATE-EWIND && Khala->GetKhalaLaBr3EEnergy(m)<EGATE+EWIND){
+    	  hIdatenG->Fill(Fatima->GetFatimaLaBr3EEnergy(n));
+	  //	  hFK->Fill(Fatima->GetFatimaLaBr3EEnergy(n));
+	  
+    	}
+    	if (Fatima->GetFatimaLaBr3EEnergy(n)>EGATE-EWIND && Fatima->GetFatimaLaBr3EEnergy(n)<EGATE+EWIND){
+    	  hIdatenG->Fill(Khala->GetKhalaLaBr3EEnergy(m));
+	  //	  hFK->Fill(Khala->GetKhalaLaBr3EEnergy(m));
+    	}
+	mIdaten->Fill(Fatima->GetFatimaLaBr3EEnergy(n), Khala->GetKhalaLaBr3EEnergy(m));
+
+      }
+    }
+
+  } 
+  return kTRUE;
+}
+
+void TestSel::SlaveTerminate()
+{
+  // The SlaveTerminate() function is called after all entries or objects
+  // have been processed. When running with PROOF SlaveTerminate() is called
+  // on each slave server.
+
+}
+
+void TestSel::Terminate()
+{
+  // The Terminate() function is the last function to be called during
+  // a query. It always runs on the client, it can be used to present
+  // the results graphically or save the results to file.
+
+
+  TCanvas* cc = new TCanvas("cc", "cc", 1200, 800);
+  if (LOGY)
+    cc->cd()->SetLogy(1);
+  hIdatenS->SetLineColor(1);
+  hIdatenS->Draw();
+  hIdatenG->SetLineColor(2);
+  hIdatenG->Draw("same");
+  // hFK->SetLineColor(4);
+  // hFK->Draw("same");
+  // hFatimaG->SetLineColor(3);
+  // hFatimaG->Draw("same");
+  // hKhalaG->SetLineColor(6);
+  // hKhalaG->Draw("same");
+  
+  TLegend* legend = new TLegend(0.55, 0.6, 0.9, 0.9);
+  legend->AddEntry(hIdatenS, "Singles", "l");
+  legend->AddEntry(hIdatenG, Form("In coincidence with %.3lf MeV", EGATE), "l");
+  // legend->AddEntry(hFK, "FATIMA-KHALA coincidences", "l");
+  // legend->AddEntry(hFatimaG, "FF coincidences", "l");
+  // legend->AddEntry(hKhalaG, "KK coincidences", "l");
+
+  
+  legend->Draw();
+  cc->SaveAs(Form("%d%s_gammas_1D.png", A, ELEMENT));
+  cc->SaveAs(Form("%d%s_gammas_1D.pdf", A, ELEMENT));
+  
+  TCanvas* c2 = new TCanvas("c2", "c2", 900, 900);
+  mIdaten->Draw("COLZ");
+  c2->SaveAs(Form("%d%s_gg_matrix.png", A, ELEMENT));
+  c2->SaveAs(Form("%d%s_gg_matrix.pdf", A, ELEMENT));
+  
+  TFile f(Form("%d%s_idaten_hists.root", A, ELEMENT),"recreate");
+   
+  mIdaten->Write();
+  hIdatenS->Write();
+  hIdatenG->Write();
+  //  hFK->Write();
+  //  h0->Write();
+  f.Close(); 
+}

@@ -1,0 +1,30 @@
+ASGARD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+Tigress Clover
+ CloverId = 0
+ Theta= 90deg
+ Phi= 0deg
+ R= 180mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 2
+ Theta= 90deg
+ Phi= 90deg
+ R= 180mm
+ Beta= 0 0 0 deg
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 4
+ Theta= 90deg
+ Phi= 180deg
+ R= 180mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Tigress Clover
+ CloverId = 6
+ Theta= 90deg
+ Phi= 270deg
+ R= 180mm
+ Beta= 0 0 0 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,147 @@
+%%%%%%%%%%Detector%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%1
+%GeneralTarget
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%1
+Target
+ THICKNESS= 5 micrometer
+ RADIUS= 10 mm
+ MATERIAL= Vacuum
+ ANGLE= 0 deg
+ X= 0 mm
+ Y= 0 mm
+ Z= 0 mm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%STARKjr
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= BB10
+ Rho=        41 mm
+ Phi=          0 deg
+ Z=         51.55 mm
+ Flip=          1
+ Beta=       180 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= BB10
+ Rho=        41 mm
+ Phi=         60 deg
+ Z=         51.55 mm
+ Flip=          1
+ Beta=       180 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= BB10
+ Rho=        41 mm
+ Phi=         120 deg
+ Z=         51.55 mm
+ Flip=          1
+ Beta=       180 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= BB10
+ Rho=        41 mm
+ Phi=         180 deg
+ Z=         51.55 mm
+ Flip=          1
+ Beta=       180 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= BB10
+ Rho=        41 mm
+ Phi=        240 deg
+ Z=         51.55 mm
+ Flip=          1
+ Beta=       180 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= BB10
+ Rho=        41 mm
+ Phi=        300 deg
+ Z=         51.55 mm
+ Flip=          1
+ Beta=       180 deg
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=          0 deg
+ Z=         51.55 mm
+ Flip=          1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         60 deg
+ Z=         51.55 mm
+ Flip=          1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         120 deg
+ Z=         51.55 mm
+ Flip=          1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         180 deg
+ Z=         51.55 mm
+ Flip=          1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=        240 deg
+ Z=         51.55 mm
+ Flip=          1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=        300 deg
+ Z=         51.55 mm
+ Flip=          1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         00 deg
+ Z=       -51.55 mm
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         60 deg
+ Z=       -51.55 mm
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         120 deg
+ Z=       -51.55 mm
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         180 deg
+ Z=       -51.55 mm
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         240 deg
+ Z=       -51.55 mm
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+STARKjr
+ Type= X6
+ Rho=         46 mm
+ Phi=         300 deg
+ Z=       -51.55 mm
+ Flip=          0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
