@@ -9,7 +9,7 @@ Sample reaction file (for Coulomb excitation) is found in Inputs/EventGenerator/
 
 Sample commands to run npsimulation with ASGARD + STARK Jr. configuration are found in NPSimulation/asgard_starkjr_commands.txt.
 A sample command is:
-NPSimulation -D ASGARD_STARKjr.detector -E 40Ar_coulex_197Au_10MeVu_pencil.reaction -B 152Eu_source.mac -O asgard_starkjr_40Ar_10MeVu_pencil
+$NPSimulation -D ASGARD_STARKjr.detector -E 40Ar_coulex_197Au_10MeVu_pencil.reaction -B 152Eu_source.mac -O asgard_starkjr_40Ar_10MeVu_pencil
 
 For the reactions of interest, SRIM output files for the beam/target nuclei are needed in .txt format. They should be placed in the Outputs/Analysis directory.
 
@@ -19,3 +19,5 @@ It will produce several plots:
 2. 2D energy matrices of Doppler-corrected gamma-ray energies vs cos(theta_pg), a) for beam and b) for target nuclei
 3. 1D energy spectra of Doppler-corrected gamma-ray energies.
  
+One needs to specify the NPTool outpu file path in the script and run:
+$root asgard_starkjr_10MeVu_analysis.C
